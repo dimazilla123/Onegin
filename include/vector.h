@@ -52,4 +52,6 @@ bool push_back(Vector* v, void* elem);
 
 void* get_element(Vector v, size_t pos);
 
+void clean_vector(Vector v);
+
 #endif

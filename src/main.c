@@ -4,6 +4,7 @@
 
 #include "algorithm.h"
 #include "string_utils.h"
+#include "vector.h"
 
 const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output]\n"
                          "-h prints this help\n"
@@ -14,7 +15,7 @@ const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output]\n"
 
 bool cmpstr(void *a, void *b)
 {
-    return strless((const char*)a, (const char*)b);
+    return strless(*(const char**)a, *(const char**)b);
 }
 
 int main(int argc, char const *argv[])
@@ -49,19 +50,23 @@ int main(int argc, char const *argv[])
                 break;
         }
     }
-    int n;
-    fscanf(in, "%d\n", &n);
-    char** strs = calloc(n, sizeof(char*));
-    for (int i = 0; i < n; ++i)
-        strs[i] = readstring(in);
-    sort(strs, n, sizeof(strs[0]), &cmpstr);
-    for (int i = 0; i < n; ++i)
-    {
-        fprintf(out, "%s\n", strs[i]);
-        free(strs[i]);
-    }
 
-    free(strs);
+    Vector strs;
+    create_vector(&strs, 1, sizeof(char*));
+    char *inp = NULL;
+    while ((inp = readstring(in)) != NULL)
+    {
+        if (!push_back(&strs, &inp))
+        {
+            fprintf(stderr, "push_back failed at element № %lu!\n", strs.len);
+            return 0;
+        }
+    }
+    sort(strs.a, strs.len, strs.el_sz, &cmpstr);
+    for (int i = 0; i < strs.len; ++i)
+        fprintf(out, "%s\n", *(char**)get_element(strs, i));
+
+    clean_vector(strs);
 
     fclose(in);
     fclose(out);

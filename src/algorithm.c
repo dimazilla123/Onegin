@@ -20,7 +20,7 @@ void sort(void *data, size_t n, size_t s, bool (*comp)(void *a, void *b))
         for (j = 0; j < i; ++j) {
             ip = (void*)((const char*)data + i * s);
             jp = (void*)((const char*)data + j * s);
-            if ((*comp)(jp, ip))
+            if (!(*comp)(jp, ip))
                 swap(ip, jp, s);
         }
     }
