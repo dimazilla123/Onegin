@@ -15,7 +15,7 @@ const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output]\n"
 
 bool cmpstr(void *a, void *b)
 {
-    return strless(*(const char**)a, *(const char**)b);
+    return strless(*(const unsigned char**)a, *(const unsigned char**)b);
 }
 
 int main(int argc, char const *argv[])

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "bool.h"
 
-bool strless(const char* a, const char *b);
+bool strless(const unsigned char* a, const unsigned char *b);
 char* readstring(FILE *in);
 
 #endif
