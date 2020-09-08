@@ -13,7 +13,7 @@ const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output]\n"
                          "If input is not given, uses stdin\n"
                          "If output is not given, uses, stdout\n";
 
-bool cmpstr(void *a, void *b)
+bool cmpstr(const void *a, const void *b)
 {
     return strless(*(const unsigned char**)a, *(const unsigned char**)b);
 }
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
     }
 
     Vector strs;
-    create_vector(&strs, 1, sizeof(char*));
+    create_vector(&strs, 0, sizeof(char*));
     char *inp = NULL;
     while ((inp = readstring(in)) != NULL)
     {

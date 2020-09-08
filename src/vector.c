@@ -6,7 +6,7 @@
 bool create_vector(Vector* v, size_t len, size_t el_sz)
 {
     assert(v != NULL);
-    v->len = 0;
+    v->len = len;
     v->real_len = (len > 0 ? len : 1);
     v->el_sz = el_sz;
     if (!(v->a = calloc(v->real_len, el_sz)))
