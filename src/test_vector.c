@@ -3,6 +3,7 @@
 
 int main(int argc, char const *argv[])
 {
+    // requires stdin input with number of elements and list of elements one by one
     int n;
     scanf("%d", &n);
     Vector v;
