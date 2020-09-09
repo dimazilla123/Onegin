@@ -36,8 +36,8 @@ struct Vector
 
 /*!
  * @fn bool create_vector(Vector *v, size_t len, size_t el_sz)
- * @brief Creates new vector
- * Creates new vector with length of len of elements with size el_sz
+ * @brief Creates new vector\n
+ * Creates new vector with length of len of elements with size el_sz\n
  * Returns true if vector created or false if allocation failed
  * @param v pointer to vector struct to write results
  * @param len minimal length of vector
@@ -76,7 +76,7 @@ void* get_element(Vector v, size_t pos);
 
 /*!
  * @fn void clean_vector(Vector v)
- * @brief Destroys vector
+ * @brief Destroys vector\n
  *
  * Removes allocated array inside vector. Leaves initial value as a garbage
  *
