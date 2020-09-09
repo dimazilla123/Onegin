@@ -18,7 +18,7 @@ bool cmpstr(const void *a, const void *b)
     return strless(*(const unsigned char**)a, *(const unsigned char**)b);
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char *const argv[])
 {
     FILE *in = stdin;
     FILE *out = stdout;
