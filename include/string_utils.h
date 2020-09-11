@@ -20,6 +20,18 @@
  * @return true if a < b in lexicographical terms
  */
 bool strless(const unsigned char* a, const unsigned char *b);
+
+/*!
+ * @fn bool strless_reversed(const unsigned char* a, const unsigned char *b)
+ * @brief As strless, but treates string backwards
+ * As strless, but treates string backwards
+ * @param a first string, not NULL
+ * @param b second string, not NULL
+ *
+ * @return true if a < b in lexicographical terms
+ */
+
+bool strless_reversed(const unsigned char* a, const unsigned char *b);
 /*!
  * @fn char* readstring(FILE *in)
  * @brief Read string from file and return pointer to dynamic array

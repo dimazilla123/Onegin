@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "vector.h"
+#include "string.h"
 #include "string_utils.h"
 
 bool isin(char c, const char s[])
@@ -12,7 +13,7 @@ bool isin(char c, const char s[])
 
 bool strless(const unsigned char* a, const unsigned char *b)
 {
-    static const char IGN[] = " ,.-\t\\/";
+    static const char IGN[] = " ,.-\t\\/\"\'!?:;";
     size_t i = 0;
     size_t j = 0;
     while (a[i] != '\0' && b[j] != '\0')
@@ -30,9 +31,28 @@ bool strless(const unsigned char* a, const unsigned char *b)
     while (isin(b[j], IGN))
         ++j;
     return a[i] < b[j];
-    while (a[i] != '\0' && b[i] != '\0' && a[i] == b[i])
-        ++i;
-    return a[i] < b[i];
+}
+
+bool strless_reversed(const unsigned char* a, const unsigned char *b)
+{
+    static const char IGN[] = " ,.-\t\\/\"\'";
+    size_t i = strlen(a);
+    size_t j = strlen(b);
+    while (i != 0 && j != 0)
+    {
+        while (i != 0 && isin(a[i], IGN))
+            --i;
+        while (j != 0 && isin(b[j], IGN))
+            --j;
+        if (i != 0 && j != 0 && a[i] == b[j])
+            --i, --j;
+        else break;
+    }
+    while (i != 0 && isin(a[i], IGN))
+        --i;
+    while (j != 0 && isin(b[j], IGN))
+        --j;
+    return a[i] < b[j];
 }
 
 char* readstring(FILE *in)
