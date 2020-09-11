@@ -12,7 +12,8 @@
 /*!
  * @fn bool strless(const unsigned char* a, const unsigned char *b)
  * @brief Compares strings lexicographicly
- * Return true if a is lexicograficly less than b in read encodinc
+ * Return true if a is lexicograficly less than b in read encoding, ignoring
+ * punctuation signs
  * @param a first string, not NULL
  * @param b second string, not NULL
  *
