@@ -4,7 +4,6 @@
 
 #include "algorithm.h"
 #include "string_utils.h"
-#include "vector.h"
 
 const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output] [-r reversed_output]\n"
                          "-h prints this help\n"
@@ -74,25 +73,36 @@ int main(int argc, char *const argv[])
         }
     }
 
-    Vector strs;
-    create_vector(&strs, 0, sizeof(char*));
-    char *inp = NULL;
-    while ((inp = readstring(in)) != NULL)
+    const size_t MAXSZ = 1024 * 1024;
+    char *text = calloc(MAXSZ, sizeof(text[0]));
+    size_t textsz = fread(text, sizeof(text), MAXSZ, in);
+    size_t lines_cnt = 0;
+    for (int i = 0; i < textsz; ++i)
     {
-        if (!push_back(&strs, &inp))
+        if (text[i] == '\n')
         {
-            fprintf(stderr, "push_back failed at element № %lu!\n", strs.len);
-            return 0;
+            ++lines_cnt;
+            text[i] = '\0';
         }
     }
-    sort(strs.a, strs.len, strs.el_sz, &cmpstr);
-    for (int i = 0; i < strs.len; ++i)
-        fprintf(out, "%s\n", *(char**)get_element(strs, i));
-    sort(strs.a, strs.len, strs.el_sz, &rcmpstr);
-    for (int i = 0; i < strs.len; ++i)
-        fprintf(rout, "%s\n", *(char**)get_element(strs, i));
+    char **lines = calloc(lines_cnt, sizeof(char*));
+    lines[0] = text;
+    int j = 1;
+    for (int i = 0; i < textsz; ++i)
+    {
+        if (text[i] == '\0')
+            lines[j++] = text + i + 1;
+    }
 
-    clean_vector(strs);
+    sort(lines, lines_cnt, sizeof(lines[0]), &cmpstr);
+    for (int i = 0; i < lines_cnt; ++i)
+        fprintf(out, "%s\n", lines[i]);
+    sort(lines, lines_cnt, sizeof(lines[0]), &rcmpstr);
+    for (int i = 0; i < lines_cnt; ++i)
+        fprintf(rout, "%s\n", lines[i]);
+
+    free(text);
+    free(lines);
 
     fclose(in);
     fclose(out);
