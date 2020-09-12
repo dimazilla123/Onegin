@@ -75,12 +75,22 @@ int main(int argc, char *const argv[])
 
     const size_t MAXSZ = 1024 * 1024;
     char *text = calloc(MAXSZ, sizeof(text[0]));
+    if (!text)
+    {
+        printf("Cannot allocate memory for file contents!\n");
+        return 0;
+    }
     size_t textsz = fread(text, sizeof(text[0]), MAXSZ, in);
     size_t lines_cnt = 0;
     for (int i = 0; i < textsz; ++i)
         if (text[i] == '\n')
             ++lines_cnt;
     char **lines = calloc(lines_cnt, sizeof(char*));
+    if (!lines)
+    {
+        printf("Cannot allocate memory for pointers to lines!\n");
+        return 0;
+    }
     size_t len = 0;
     int j = 0;
     for (int i = 0; i < textsz && j < lines_cnt; ++i)
