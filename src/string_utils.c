@@ -2,7 +2,13 @@
 #include "vector.h"
 #include "string.h"
 #include "string_utils.h"
-
+/*!
+ * @fn bool isin(char c, const char s[])
+ * @brief check if c in s
+ * @param c character, ocurtion which is needed to check
+ * @param s string, where character c is searched
+ * @return true if c is found, false otherwise
+ */
 bool isin(char c, const char s[])
 {
     for (int i = 0; s[i] != '\0'; ++i)
@@ -11,6 +17,7 @@ bool isin(char c, const char s[])
     return false;
 }
 
+// List of characters to ignore
 const char IGN[] = " ,.-\t\\/\"\'!?:;()";
 
 bool strless(const unsigned char* a, const unsigned char *b)
@@ -34,14 +41,21 @@ bool strless(const unsigned char* a, const unsigned char *b)
     return a[i] < b[j];
 }
 
+// God, have mercy at this cursed UTF-8 land
+/*!
+ * @fn wchar_t get_utf8_rev(const unsigned char* a)
+ * @brief returns 2 byte UTF-8 character or normal one backwards
+ */
 wchar_t get_utf8_rev(const unsigned char* a)
 {
-    static const unsigned char RUSSIAN[] = u8"абвгдеёжзийклмнопрстуфхцчшщыъьэюя"
-                                      "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЪЬЭЮЯ";
+    // Ё and ё are out of segment А-Я and а-я
+    // I use array instead of interval check because of possible another tricky simbols
+    static const unsigned char TWO_BYTE[] = u8"абвгдеёжзийклмнопрстуфхцчшщыъьэюя"
+                                              "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЪЬЭЮЯ";
     wchar_t c = (wchar_t)a[-1] * 256 + a[0];
-    for (int i = 0; i < sizeof(RUSSIAN) / sizeof(RUSSIAN[0]) / 2; ++i)
+    for (int i = 0; i < sizeof(TWO_BYTE) / sizeof(TWO_BYTE[0]) / 2; ++i)
     {
-        wchar_t d = (wchar_t)RUSSIAN[2 * i] * 256 + RUSSIAN[2 * i + 1];
+        wchar_t d = (wchar_t)TWO_BYTE[2 * i] * 256 + TWO_BYTE[2 * i + 1];
         if (c == d)
             return c;
     }

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Production-level quadratic equation solver: include/string_utils.h File Reference</title>
+<title>Onegin sort: include/string_utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Production-level quadratic equation solver
+   <div id="projectname">Onegin sort
    </div>
   </td>
  </tr>
@@ -80,8 +80,11 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a62f4bdd4a0a7eee0060b09f4d6a98e8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bool_8h.html#af6a258d8f3ee5206d682d799316314b1">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f">strless</a> (const unsigned char *a, const unsigned char *b)</td></tr>
-<tr class="memdesc:a62f4bdd4a0a7eee0060b09f4d6a98e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares strings lexicographicly Return true if a is lexicograficly less than b in read encodinc.  <a href="string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f">More...</a><br /></td></tr>
+<tr class="memdesc:a62f4bdd4a0a7eee0060b09f4d6a98e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares strings lexicographicly Return true if a is lexicograficly less than b in read encoding, ignoring punctuation signs.  <a href="string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f">More...</a><br /></td></tr>
 <tr class="separator:a62f4bdd4a0a7eee0060b09f4d6a98e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a665948d975b131530ab8ad912d689"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bool_8h.html#af6a258d8f3ee5206d682d799316314b1">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a73a665948d975b131530ab8ad912d689">strless_reversed</a> (const unsigned char *a, const unsigned char *b)</td></tr>
+<tr class="memdesc:a73a665948d975b131530ab8ad912d689"><td class="mdescLeft">&#160;</td><td class="mdescRight">As strless, but treates string backwards As strless, but treates string backwards.  <a href="string__utils_8h.html#a73a665948d975b131530ab8ad912d689">More...</a><br /></td></tr>
+<tr class="separator:a73a665948d975b131530ab8ad912d689"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0447a4b575546febee9f4a91a0bf3448"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a0447a4b575546febee9f4a91a0bf3448">readstring</a> (FILE *in)</td></tr>
 <tr class="memdesc:a0447a4b575546febee9f4a91a0bf3448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read string from file and return pointer to dynamic array.  <a href="string__utils_8h.html#a0447a4b575546febee9f4a91a0bf3448">More...</a><br /></td></tr>
 <tr class="separator:a0447a4b575546febee9f4a91a0bf3448"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,7 +143,45 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compares strings lexicographicly Return true if a is lexicograficly less than b in read encodinc. </p>
+<p>Compares strings lexicographicly Return true if a is lexicograficly less than b in read encoding, ignoring punctuation signs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>first string, not NULL </td></tr>
+    <tr><td class="paramname">b</td><td>second string, not NULL</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a &lt; b in lexicographical terms </dd></dl>
+
+</div>
+</div>
+<a id="a73a665948d975b131530ab8ad912d689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73a665948d975b131530ab8ad912d689">&#9670;&nbsp;</a></span>strless_reversed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="bool_8h.html#af6a258d8f3ee5206d682d799316314b1">bool</a> strless_reversed </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>As strless, but treates string backwards As strless, but treates string backwards. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td>first string, not NULL </td></tr>

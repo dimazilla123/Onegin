@@ -22,6 +22,7 @@ bool push_back(Vector* v, void* elem)
     assert(elem != NULL);
     if (v->len == v->real_len)
     {
+        // I know about realloc, just wanted to practice
         buffer = calloc(v->real_len * 2, v->el_sz);
         if (!buffer)
             return false;

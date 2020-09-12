@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Production-level quadratic equation solver: include/string_utils.h Source File</title>
+<title>Onegin sort: include/string_utils.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Production-level quadratic equation solver
+   <div id="projectname">Onegin sort
    </div>
   </td>
  </tr>
@@ -78,14 +78,17 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="bool_8h.html">bool.h</a>&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f">strless</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* a, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *b);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="string__utils_8h.html#a0447a4b575546febee9f4a91a0bf3448">readstring</a>(FILE *in);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f">strless</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* a, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *b);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="string__utils_8h.html#a73a665948d975b131530ab8ad912d689">strless_reversed</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* a, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *b);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="string__utils_8h.html#a0447a4b575546febee9f4a91a0bf3448">readstring</a>(FILE *in);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astring__utils_8h_html_a62f4bdd4a0a7eee0060b09f4d6a98e8f"><div class="ttname"><a href="string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f">strless</a></div><div class="ttdeci">bool strless(const unsigned char *a, const unsigned char *b)</div><div class="ttdoc">Compares strings lexicographicly Return true if a is lexicograficly less than b in read encodinc.</div><div class="ttdef"><b>Definition:</b> string_utils.c:5</div></div>
+<div class="ttc" id="astring__utils_8h_html_a73a665948d975b131530ab8ad912d689"><div class="ttname"><a href="string__utils_8h.html#a73a665948d975b131530ab8ad912d689">strless_reversed</a></div><div class="ttdeci">bool strless_reversed(const unsigned char *a, const unsigned char *b)</div><div class="ttdoc">As strless, but treates string backwards As strless, but treates string backwards.</div><div class="ttdef"><b>Definition:</b> string_utils.c:65</div></div>
+<div class="ttc" id="astring__utils_8h_html_a62f4bdd4a0a7eee0060b09f4d6a98e8f"><div class="ttname"><a href="string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f">strless</a></div><div class="ttdeci">bool strless(const unsigned char *a, const unsigned char *b)</div><div class="ttdoc">Compares strings lexicographicly Return true if a is lexicograficly less than b in read encoding,...</div><div class="ttdef"><b>Definition:</b> string_utils.c:23</div></div>
 <div class="ttc" id="abool_8h_html"><div class="ttname"><a href="bool_8h.html">bool.h</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_a0447a4b575546febee9f4a91a0bf3448"><div class="ttname"><a href="string__utils_8h.html#a0447a4b575546febee9f4a91a0bf3448">readstring</a></div><div class="ttdeci">char * readstring(FILE *in)</div><div class="ttdoc">Read string from file and return pointer to dynamic array.</div><div class="ttdef"><b>Definition:</b> string_utils.c:13</div></div>
+<div class="ttc" id="astring__utils_8h_html_a0447a4b575546febee9f4a91a0bf3448"><div class="ttname"><a href="string__utils_8h.html#a0447a4b575546febee9f4a91a0bf3448">readstring</a></div><div class="ttdeci">char * readstring(FILE *in)</div><div class="ttdoc">Read string from file and return pointer to dynamic array.</div><div class="ttdef"><b>Definition:</b> string_utils.c:88</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

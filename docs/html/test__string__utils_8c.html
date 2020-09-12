@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Production-level quadratic equation solver: src/test_string_utils.c File Reference</title>
+<title>Onegin sort: src/test_string_utils.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Production-level quadratic equation solver
+   <div id="projectname">Onegin sort
    </div>
   </td>
  </tr>
@@ -73,11 +73,18 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="vector_8h_source.html">vector.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="string__utils_8h_source.html">string_utils.h</a>&quot;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;malloc.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:abf0060e13f2fd6bb460dd56320c86610"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bool_8h.html#af6a258d8f3ee5206d682d799316314b1">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__string__utils_8c.html#abf0060e13f2fd6bb460dd56320c86610">check_order</a> (const unsigned char *a[], size_t s)</td></tr>
 <tr class="separator:abf0060e13f2fd6bb460dd56320c86610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba736a242029bba94778ecbace13a65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__string__utils_8c.html#a5ba736a242029bba94778ecbace13a65">test</a> (const unsigned char *ordered_material[], size_t n, <a class="el" href="bool_8h.html#af6a258d8f3ee5206d682d799316314b1">bool</a>(*cmp)(const unsigned char *a, const unsigned char *b))</td></tr>
+<tr class="separator:a5ba736a242029bba94778ecbace13a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a9a8836962d890b4939c112fd29190"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__string__utils_8c.html#aa8a9a8836962d890b4939c112fd29190">reverse</a> (char s[])</td></tr>
+<tr class="separator:aa8a9a8836962d890b4939c112fd29190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf9e6b7e6f15df4b525a2e7705ba3089"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__string__utils_8c.html#abf9e6b7e6f15df4b525a2e7705ba3089">main</a> (int argc, char const *argv[])</td></tr>
 <tr class="separator:abf9e6b7e6f15df4b525a2e7705ba3089"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -127,6 +134,58 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>argv</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8a9a8836962d890b4939c112fd29190"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8a9a8836962d890b4939c112fd29190">&#9670;&nbsp;</a></span>reverse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reverse </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>s</em>[]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ba736a242029bba94778ecbace13a65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ba736a242029bba94778ecbace13a65">&#9670;&nbsp;</a></span>test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>ordered_material</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="bool_8h.html#af6a258d8f3ee5206d682d799316314b1">bool</a>(*)(const unsigned char *a, const unsigned char *b)&#160;</td>
+          <td class="paramname"><em>cmp</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

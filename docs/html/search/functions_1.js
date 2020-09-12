@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dist_52',['dist',['../algorithm_8c.html#ae273988d4a12b1acc0362e9bbfd5ae3c',1,'algorithm.c']]]
+  ['dist_62',['dist',['../algorithm_8c.html#ae273988d4a12b1acc0362e9bbfd5ae3c',1,'algorithm.c']]]
 ];

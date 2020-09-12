@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['len_14',['len',['../structVector.html#aa6d6b43a537b8e7222224c00c58e79f5',1,'Vector']]]
+  ['ign_16',['IGN',['../string__utils_8c.html#a3b2896fbc496a0a905eee972a0f17066',1,'string_utils.c']]],
+  ['isin_17',['isin',['../string__utils_8c.html#a9c57152a57cea6b7353780cfadeecd92',1,'string_utils.c']]]
 ];

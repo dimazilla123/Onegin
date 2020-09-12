@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['sort_21',['sort',['../algorithm_8c.html#aae53464fa2a5088a796774c77c5f479b',1,'sort(void *data, size_t n, size_t s, bool(*comp)(const void *a, const void *b)):&#160;algorithm.c'],['../algorithm_8h.html#aae53464fa2a5088a796774c77c5f479b',1,'sort(void *data, size_t n, size_t s, bool(*comp)(const void *a, const void *b)):&#160;algorithm.c']]],
-  ['sort_5fquad_22',['sort_quad',['../algorithm_8c.html#a59bf127b5418dba9466b4d4dd6a6c459',1,'sort_quad(void *data, size_t n, size_t s, bool(*comp)(const void *a, const void *b)):&#160;algorithm.c'],['../algorithm_8h.html#a59bf127b5418dba9466b4d4dd6a6c459',1,'sort_quad(void *data, size_t n, size_t s, bool(*comp)(const void *a, const void *b)):&#160;algorithm.c']]],
-  ['string_5futils_2ec_23',['string_utils.c',['../string__utils_8c.html',1,'']]],
-  ['string_5futils_2eh_24',['string_utils.h',['../string__utils_8h.html',1,'']]],
-  ['strless_25',['strless',['../string__utils_8c.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f',1,'strless(const unsigned char *a, const unsigned char *b):&#160;string_utils.c'],['../string__utils_8h.html#a62f4bdd4a0a7eee0060b09f4d6a98e8f',1,'strless(const unsigned char *a, const unsigned char *b):&#160;string_utils.c']]],
-  ['swap_26',['swap',['../algorithm_8c.html#ac4fe5278cfa018d7205b0f690066240e',1,'swap(void *a, void *b, size_t sz):&#160;algorithm.c'],['../algorithm_8h.html#ac4fe5278cfa018d7205b0f690066240e',1,'swap(void *a, void *b, size_t sz):&#160;algorithm.c']]]
+  ['rcmpstr_24',['rcmpstr',['../main_8c.html#a3976b5a583076b290ccc421924eb6443',1,'main.c']]],
+  ['readstring_25',['readstring',['../string__utils_8c.html#a06a3a95f7fac219a1a87b702e0441909',1,'readstring(FILE *in):&#160;string_utils.c'],['../string__utils_8h.html#a0447a4b575546febee9f4a91a0bf3448',1,'readstring(FILE *in):&#160;string_utils.c']]],
+  ['real_5flen_26',['real_len',['../structVector.html#a772f451dfd62eb2c34f811078e6625f5',1,'Vector']]],
+  ['reverse_27',['reverse',['../test__string__utils_8c.html#aa8a9a8836962d890b4939c112fd29190',1,'test_string_utils.c']]]
 ];
