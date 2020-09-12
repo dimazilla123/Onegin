@@ -12,5 +12,5 @@ $ make
 ## Usage
 Pipe input file as stdin or with -i key, same with stdout and -o key and reversed sort stdout and -r
 ```bash
-$ ./sort [-i onegin] [-o sorted_onegin] [-r backwors_sorted_onegin]
+$ ./sort [-i onegin] [-o sorted_onegin] [-r backwords_sorted_onegin]
 ```
