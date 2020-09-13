@@ -24,7 +24,7 @@ void* partition(void *data, size_t c, size_t n, size_t s, bool (*comp)(const voi
 {
     char* l = (char*)data;
     char* r = (char*)data + (n - 1) * s;
-    void *pivot = calloc(s, 1);
+    void *pivot = calloc(1, s);
     if (!pivot)
     {
         fprintf(stderr, "Cannot allocate memory for pivot element!\n");

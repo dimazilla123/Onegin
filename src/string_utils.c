@@ -30,7 +30,7 @@ bool strless(const unsigned char* a, const unsigned char *b)
             ++i;
         while (isin(b[j], IGN))
             ++j;
-        if (a[i] == b[j])
+        if (a[i] != '\0' && a[i] == b[j])
             ++i, ++j;
         else break;
     }

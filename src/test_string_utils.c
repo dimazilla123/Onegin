@@ -44,7 +44,7 @@ void reverse(char s[])
 
 int main(int argc, char const *argv[])
 {
-    char *exper[] =
+    unsigned char *exper[] =
     {
         "И где теперь ее сестра?",
         "Не только грусть... душа моя,"
@@ -153,6 +153,8 @@ int main(int argc, char const *argv[])
     }
     test(reversed_material, sizeof(ordered_material) / sizeof(ordered_material[0]), &strless_reversed);
 
+    for (int i = 0; i < sizeof(reversed_material) / sizeof(reversed_material[0]); ++i)
+        free(reversed_material[i]);
 
     return 0;
 }

@@ -77,5 +77,10 @@ int main(int argc, char const *argv[])
     if (!check_order(a, sizeof(a) / sizeof(a[0])))
         printf("Wrong order!\n");
 
+    free(ia_fast);
+    free(ia_slow);
+    free(la_fast);
+    free(la_slow);
+
     return 0;
 }
