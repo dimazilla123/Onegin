@@ -13,15 +13,12 @@ const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output] [-r reversed_out
                          "If input is not given, uses stdin\n"
                          "If output is not given, uses, stdout\n";
 
-bool cmpstr(const void *a, const void *b)
-{
-    return strless(*(const unsigned char**)a, *(const unsigned char**)b);
-}
+bool cmpstr(const void *a, const void *b);
 
-bool rcmpstr(const void *a, const void *b)
-{
-    return strless_reversed(*(const unsigned char**)a, *(const unsigned char**)b);
-}
+
+bool rcmpstr(const void *a, const void *b);
+
+char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p);
 
 int main(int argc, char *const argv[])
 {
@@ -72,35 +69,14 @@ int main(int argc, char *const argv[])
             }
         }
     }
-
-    const size_t MAXSZ = 1024 * 1024;
-    char *text = calloc(MAXSZ, sizeof(text[0]));
-    if (!text)
-    {
-        printf("Cannot allocate memory for file contents!\n");
-        return 0;
-    }
-    size_t textsz = fread(text, sizeof(text[0]), MAXSZ, in);
+    char *text = NULL;
+    char **lines = NULL;
     size_t lines_cnt = 0;
-    for (int i = 0; i < textsz; ++i)
-        if (text[i] == '\n')
-            ++lines_cnt;
-    char **lines = calloc(lines_cnt, sizeof(char*));
-    if (!lines)
+
+    if ((lines = getlines(in, &lines_cnt, &text)) == NULL)
     {
-        printf("Cannot allocate memory for pointers to lines!\n");
+        printf("Cannot split file contents in lines\n");
         return 0;
-    }
-    size_t len = 0;
-    int j = 0;
-    for (int i = 0; i < textsz && j < lines_cnt; ++i)
-    {
-        if (text[i] == '\n')
-        {
-            lines[j++] = text + i - len;
-            text[i] = '\0';
-            len = 0;
-        } else ++len;
     }
 
     sort(lines, lines_cnt, sizeof(lines[0]), &cmpstr);
@@ -118,4 +94,50 @@ int main(int argc, char *const argv[])
     fclose(rout);
 
     return 0;
+}
+
+bool cmpstr(const void *a, const void *b)
+{
+    return strless(*(const unsigned char**)a, *(const unsigned char**)b);
+}
+
+bool rcmpstr(const void *a, const void *b)
+{
+    return strless_reversed(*(const unsigned char**)a, *(const unsigned char**)b);
+}
+
+char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p)
+{
+    const size_t MAXSZ = 1024 * 1024;
+    char *text = calloc(MAXSZ, sizeof(text[0]));
+    if (!text)
+    {
+        printf("Cannot allocate memory for file contents!\n");
+        return NULL;
+    }
+    size_t textsz = fread(text, sizeof(text[0]), MAXSZ, in);
+    size_t lines_cnt = 0;
+    for (int i = 0; i < textsz; ++i)
+        if (text[i] == '\n')
+            ++lines_cnt;
+    char **lines = calloc(lines_cnt, sizeof(char*));
+    if (!lines)
+    {
+        printf("Cannot allocate memory for pointers to lines!\n");
+        return NULL;
+    }
+    size_t len = 0;
+    int j = 0;
+    for (int i = 0; i < textsz && j < lines_cnt; ++i)
+    {
+        if (text[i] == '\n')
+        {
+            lines[j++] = text + i - len;
+            text[i] = '\0';
+            len = 0;
+        } else ++len;
+    }
+    *lines_cnt_p = lines_cnt;
+    *text_p = text;
+    return lines;
 }
