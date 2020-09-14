@@ -31,17 +31,8 @@ bool check_order(const int a[], size_t s)
     return true;
 }
 
-int main(int argc, char const *argv[])
+bool test_random_sort(int array_length)
 {
-    if (argc < 3)
-    {
-        printf("Usage: %s seed array_length\n", argv[0]);
-        return 0;
-    }
-
-    lrand(atol(argv[1]));
-    int array_length = atoi(argv[2]);
-
     int *ia_fast = calloc(array_length, sizeof(ia_fast[0]));
     int *ia_slow = calloc(array_length, sizeof(ia_slow[0]));
 
@@ -61,26 +52,41 @@ int main(int argc, char const *argv[])
             if (la_fast[i] != la_slow[i])
             {
                 printf("Elements %d are not equal in long!\n", i);
-                return 0;
+                return false;
             }
             if (ia_fast[i] != ia_slow[i])
             {
                 printf("Elements %d are not equal in int!\n", i);
-                return 0;
+                return false;
             }
         }
     }
+    free(ia_fast);
+    free(ia_slow);
+    free(la_fast);
+    free(la_slow);
+
+    return true;
+}
+
+int main(int argc, char const *argv[])
+{
+    if (argc < 3)
+    {
+        printf("Usage: %s seed array_length\n", argv[0]);
+        return 0;
+    }
+
+    lrand(atol(argv[1]));
+    int array_length = atoi(argv[2]);
+
+    if (!test_random_sort(array_length)) return 0;
 
     int a[] = {5, 3, 4, 3, 2, 1};
 
     sort(a, sizeof(a) / sizeof(a[0]), sizeof(a[0]), &compare_int);
     if (!check_order(a, sizeof(a) / sizeof(a[0])))
         printf("Wrong order!\n");
-
-    free(ia_fast);
-    free(ia_slow);
-    free(la_fast);
-    free(la_slow);
 
     return 0;
 }
