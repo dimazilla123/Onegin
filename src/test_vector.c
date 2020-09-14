@@ -12,5 +12,6 @@ int main(int argc, char const *argv[])
         scanf("%d", (int*)get_element(v, i));
     for (int i = 0; i < n; ++i)
         printf("%d\n", *(int*)get_element(v, i));
+    clean_vector(v);
     return 0;
 }
