@@ -39,5 +39,6 @@ bool strless_reversed(const unsigned char* a, const unsigned char *b);
  * @return NULL file has ended, pointer no read string otherwise
  */
 char* readstring(FILE *in);
+wchar_t get_utf8_rev(const unsigned char* a);
 
 #endif

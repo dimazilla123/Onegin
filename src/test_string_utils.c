@@ -1,5 +1,6 @@
 #include "vector.h"
 #include "string_utils.h"
+#include "algorithm.h"
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
@@ -32,8 +33,30 @@ void test(const unsigned char *ordered_material[], size_t n,
 
 void reverse(char s[])
 {
+    static char *buffer = NULL;
     size_t l = strlen(s);
+    buffer = realloc(buffer, l);
+    size_t j = l - 1;
     char t = '\0';
+    unsigned char b2[2] = "  ";
+    for (size_t i = 0; i < l; ++i)
+    {
+        if (i < l - 1)
+        {
+            b2[0] = s[i];
+            b2[1] = s[i + 1];
+            if (get_utf8_rev(b2 + 1) > 256)
+            {
+                buffer[l - i - 1] = b2[1];
+                buffer[l - i - 2] = b2[0];
+                ++i;
+            }
+            else buffer[l - i - 1] = s[i];
+        } else buffer[l - i - 1] = s[i];
+    }
+    for (int i = 0; i < l; ++i)
+        s[i] = buffer[i];
+    return;
     for (size_t i = 0; i < l / 2; ++i)
     {
         t = s[i];

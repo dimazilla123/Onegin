@@ -41,6 +41,11 @@ bool strless(const unsigned char* a, const unsigned char *b)
     return a[i] < b[j];
 }
 
+bool check_mask(size_t x, size_t ones, size_t zeros)
+{
+    return (x & ones) == ones && ((~x) & zeros) == zeros;
+}
+
 // God, have mercy at this cursed UTF-8 land
 /*!
  * @fn wchar_t get_utf8_rev(const unsigned char* a)
@@ -48,17 +53,11 @@ bool strless(const unsigned char* a, const unsigned char *b)
  */
 wchar_t get_utf8_rev(const unsigned char* a)
 {
-    // Ё and ё are out of segment А-Я and а-я
-    // I use array instead of interval check because of possible another tricky simbols
-    static const unsigned char TWO_BYTE[] = u8"абвгдеёжзийклмнопрстуфхцчшщыъьэюя"
-                                              "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЪЬЭЮЯ";
+    const size_t ones =  0b1100000010000000;
+    const size_t zeros = 0b0010000001000000;
     wchar_t c = (wchar_t)a[-1] * 256 + a[0];
-    for (int i = 0; i < sizeof(TWO_BYTE) / sizeof(TWO_BYTE[0]) / 2; ++i)
-    {
-        wchar_t d = (wchar_t)TWO_BYTE[2 * i] * 256 + TWO_BYTE[2 * i + 1];
-        if (c == d)
-            return c;
-    }
+    if (check_mask(c, ones, zeros))
+        return c;
     return a[0];
 }
 
