@@ -3,6 +3,7 @@
 #include <getopt.h>
 
 #include "algorithm.h"
+#include "vector.h"
 #include "string_utils.h"
 
 const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output] [-r reversed_output]\n"
@@ -14,10 +15,8 @@ const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output] [-r reversed_out
                          "If output is not given, uses, stdout\n";
 
 bool cmpstr(const void *a, const void *b);
-
-
 bool rcmpstr(const void *a, const void *b);
-
+char *readcontent(FILE *in, size_t *textsz_p);
 char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p);
 
 int main(int argc, char *const argv[])
@@ -106,18 +105,43 @@ bool rcmpstr(const void *a, const void *b)
     return strless_reversed(*(const unsigned char**)a, *(const unsigned char**)b);
 }
 
-char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p)
+char *readcontent(FILE *in, size_t *textsz_p)
 {
-    const size_t MAXSZ = 1024 * 1024;
-    char *text = calloc(MAXSZ, sizeof(text[0]));
+    if (in == stdin)
+    {
+        Vector v;
+        create_vector(&v, 1, sizeof(char));
+        int c = EOF;
+        while ((c = getc(in)) != EOF)
+            if (!push_back(&v, &c))
+            {
+                printf("Cannot pull symbol from stdin!\n");
+                return NULL;
+            }
+        *textsz_p = v.len;
+        return v.a;
+    }
+    fseek(in, 0L, SEEK_END);
+    *textsz_p = ftell(in) + 1;
+    rewind(in);
+    char *text = calloc(*textsz_p, sizeof(text[0]));
     if (!text)
     {
-        printf("Cannot allocate memory for file contents!\n");
+        printf("Cannot allocate memory for text from file!\n");
         return NULL;
     }
-    size_t textsz = fread(text, sizeof(text[0]), MAXSZ, in);
+    fread(text, *textsz_p - 1, sizeof(char), in);
+    return text;
+}
+
+char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p)
+{
+    size_t textsz = 0;
+    char *text = readcontent(in, &textsz);
+    if (!text)
+        return NULL;
     size_t lines_cnt = 0;
-    for (int i = 0; i < textsz; ++i)
+    for (int i = 1; i < textsz; ++i)
         if (text[i] == '\n')
             ++lines_cnt;
     char **lines = calloc(lines_cnt, sizeof(char*));
@@ -128,7 +152,7 @@ char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p)
     }
     size_t len = 0;
     int j = 0;
-    for (int i = 0; i < textsz && j < lines_cnt; ++i)
+    for (int i = 1; i < textsz && j < lines_cnt; ++i)
     {
         if (text[i] == '\n')
         {
