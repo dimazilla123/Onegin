@@ -42,7 +42,7 @@ bool test_random_sort(int array_length)
     for (int l = 1; l <= array_length; ++l)
     {
         for (int i = 0; i < l; ++i)
-            la_fast[i] = la_slow[i] = ia_fast[i] = ia_slow[i] = lrand(0);
+            ia_fast[i] = ia_slow[i] = la_fast[i] = la_slow[i] = lrand(0);
         sort(la_fast, l, sizeof(la_fast[0]), &compare_long);
         sort_quad(la_slow, l, sizeof(la_fast[0]), &compare_long);
         sort(ia_fast, l, sizeof(ia_fast[0]), &compare_int);
