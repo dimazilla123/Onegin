@@ -130,7 +130,7 @@ char *readcontent(FILE *in, size_t *textsz_p)
         printf("Cannot allocate memory for text from file!\n");
         return NULL;
     }
-    fread(text, *textsz_p - 1, sizeof(char), in);
+    fread(text + 1, *textsz_p - 1, sizeof(char), in);
     return text;
 }
 
