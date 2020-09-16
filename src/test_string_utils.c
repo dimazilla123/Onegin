@@ -36,7 +36,6 @@ void reverse(char s[])
     static char *buffer = NULL;
     size_t l = strlen(s);
     buffer = realloc(buffer, l);
-    size_t j = l - 1;
     char t = '\0';
     unsigned char b2[2] = "  ";
     for (size_t i = 0; i < l; ++i)

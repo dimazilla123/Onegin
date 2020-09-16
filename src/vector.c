@@ -16,8 +16,6 @@ bool create_vector(Vector* v, size_t len, size_t el_sz)
 
 bool push_back(Vector* v, void* elem)
 {
-    void *buffer = NULL;
-
     assert(v != NULL);
     assert(elem != NULL);
     if (v->len == v->real_len)
