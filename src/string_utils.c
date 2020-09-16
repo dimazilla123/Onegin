@@ -63,8 +63,8 @@ wchar_t get_utf8_rev(const unsigned char* a)
 
 bool strless_reversed(const unsigned char* a, const unsigned char *b)
 {
-    size_t i = strlen(a);
-    size_t j = strlen(b);
+    size_t i = strlen((const char*)a);
+    size_t j = strlen((const char*)b);
     while (i != 0 && j != 0)
     {
         while (i != 0 && isin(a[i - 1], IGN))

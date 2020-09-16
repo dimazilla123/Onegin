@@ -69,10 +69,10 @@ int main(int argc, char const *argv[])
 {
     unsigned char *exper[] =
     {
-        "И где теперь ее сестра?",
-        "Не только грусть... душа моя,"
+        (unsigned char*)"И где теперь ее сестра?",
+        (unsigned char*)"Не только грусть... душа моя,"
     };
-    test(exper, sizeof(exper) / sizeof(exper[0]), &strless_reversed);
+    test((const unsigned char**)exper, sizeof(exper) / sizeof(exper[0]), &strless_reversed);
     unsigned char *ordered_material[] =
     {
         (unsigned char*)"",
@@ -155,26 +155,26 @@ int main(int argc, char const *argv[])
         (unsigned char*)"ю",
         (unsigned char*)"я",
     };
-    test(ordered_material, sizeof(ordered_material) / sizeof(ordered_material[0]), &strless);
+    test((const unsigned char **)ordered_material, sizeof(ordered_material) / sizeof(ordered_material[0]), &strless);
 
     // Костыль, чтобы избежать ошибки сегментации при попытки изменить литерал
     // (спасибо, read-only .text)
     unsigned char *reversed_material[sizeof(ordered_material) / sizeof(ordered_material[0])] = {};
     for (int i = 0; i < sizeof(ordered_material)/ sizeof(ordered_material[0]); ++i)
     {
-        reversed_material[i] = calloc(strlen(ordered_material[i]) + 1, 1);
-        strcpy(reversed_material[i], ordered_material[i]);
+        reversed_material[i] = calloc(strlen((const char*)(ordered_material[i])) + 1, 1);
+        strcpy((char*)(reversed_material[i]), (const char*)(ordered_material[i]));
         printf("%s\n", reversed_material[i]);
-        for (int j = 0; j < strlen(reversed_material[i]); ++j)
+        for (int j = 0; j < strlen((const char*)(reversed_material[i])); ++j)
             printf("%2x ", reversed_material[i][j]);
         putchar('\n');
-        reverse(reversed_material[i]);
+        reverse((char*)(reversed_material[i]));
         printf("%s\n", reversed_material[i]);
-        for (int j = 0; j < strlen(reversed_material[i]); ++j)
+        for (int j = 0; j < strlen((const char*)(reversed_material[i])); ++j)
             printf("%2x ", reversed_material[i][j]);
         putchar('\n');
     }
-    test(reversed_material, sizeof(ordered_material) / sizeof(ordered_material[0]), &strless_reversed);
+    test((const unsigned char**)(reversed_material), sizeof(ordered_material) / sizeof(ordered_material[0]), &strless_reversed);
 
     for (int i = 0; i < sizeof(reversed_material) / sizeof(reversed_material[0]); ++i)
         free(reversed_material[i]);
