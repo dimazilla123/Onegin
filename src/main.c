@@ -17,7 +17,8 @@ const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output] [-r reversed_out
 bool cmpstr(const void *a, const void *b);
 bool rcmpstr(const void *a, const void *b);
 char *readcontent(FILE *in, size_t *textsz_p);
-char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p);
+char **getlines(const char *text, size_t textsz, size_t *lines_cnt_p);
+void getlines_reversed(char **orig, char **reverse, size_t textsz, size_t lines_cnt);
 
 int main(int argc, char *const argv[])
 {
@@ -69,24 +70,47 @@ int main(int argc, char *const argv[])
         }
     }
     char *text = NULL;
+    size_t textsz = 0;
+
+    if ((text = readcontent(in, &textsz)) == NULL)
+    {
+        printf("Cannot read file contents!\n");
+        return 0;
+    }
+
     char **lines = NULL;
     size_t lines_cnt = 0;
 
-    if ((lines = getlines(in, &lines_cnt, &text)) == NULL)
+    if ((lines = getlines(text, textsz, &lines_cnt)) == NULL)
     {
         printf("Cannot split file contents in lines\n");
         return 0;
     }
 
+    /*
+    char **rlines = calloc(lines_cnt, sizeof(rlines[0]));
+    if (rlines == NULL)
+    {
+        printf("Cannot allocate memory for pointers to reversed lines!\n");
+        return 0;
+    }
+    getlines_reversed(lines, rlines, textsz, lines_cnt);
+    */
+
+    for (size_t i = 0; i < textsz; ++i)
+        if (text[i] == '\n')
+            text[i] = '\0';
+
     sort(lines, lines_cnt, sizeof(lines[0]), &cmpstr);
-    for (int i = 0; i < lines_cnt; ++i)
+    for (size_t i = 0; i < lines_cnt; ++i)
         fprintf(out, "%s\n", lines[i]);
     sort(lines, lines_cnt, sizeof(lines[0]), &rcmpstr);
-    for (int i = 0; i < lines_cnt; ++i)
+    for (size_t i = 0; i < lines_cnt; ++i)
         fprintf(rout, "%s\n", lines[i]);
 
     free(text);
     free(lines);
+    //free(rlines);
 
     fclose(in);
     fclose(out);
@@ -134,14 +158,12 @@ char *readcontent(FILE *in, size_t *textsz_p)
     return text;
 }
 
-char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p)
+char **getlines(const char *text, size_t textsz, size_t *lines_cnt_p)
 {
-    size_t textsz = 0;
-    char *text = readcontent(in, &textsz);
     if (!text)
         return NULL;
     size_t lines_cnt = 0;
-    for (int i = 1; i < textsz; ++i)
+    for (int i = 0; i < textsz; ++i)
         if (text[i] == '\n')
             ++lines_cnt;
     char **lines = calloc(lines_cnt, sizeof(char*));
@@ -152,16 +174,21 @@ char **getlines(FILE *in, size_t *lines_cnt_p, char **text_p)
     }
     size_t len = 0;
     int j = 0;
-    for (int i = 1; i < textsz && j < lines_cnt; ++i)
+    for (size_t i = 1; i < textsz && j < lines_cnt; ++i)
     {
         if (text[i] == '\n')
         {
             lines[j++] = text + i - len;
-            text[i] = '\0';
             len = 0;
         } else ++len;
     }
     *lines_cnt_p = lines_cnt;
-    *text_p = text;
     return lines;
+}
+
+void getlines_reversed(char **orig, char **reverse, size_t textsz, size_t lines_cnt)
+{
+    for (int i = 0; i < lines_cnt - 1; ++i)
+        reverse[i] = orig[i + 1] - 2;
+    reverse[lines_cnt - 1] = orig[0] + textsz;
 }
