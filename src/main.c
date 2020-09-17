@@ -17,7 +17,7 @@ const char* USEAGELINE = "Usage: %s [-h] [-i input] [-o output] [-r reversed_out
 bool cmpstr(const void *a, const void *b);
 bool rcmpstr(const void *a, const void *b);
 char *readcontent(FILE *in, size_t *textsz_p);
-char **getlines(const char *text, size_t textsz, size_t *lines_cnt_p);
+const char **getlines(const char *text, size_t textsz, size_t *lines_cnt_p);
 void getlines_reversed(char **orig, char **reverse, size_t textsz, size_t lines_cnt);
 
 int main(int argc, char *const argv[])
@@ -78,7 +78,7 @@ int main(int argc, char *const argv[])
         return 0;
     }
 
-    char **lines = NULL;
+    const char **lines = NULL;
     size_t lines_cnt = 0;
 
     if ((lines = getlines(text, textsz, &lines_cnt)) == NULL)
@@ -158,7 +158,7 @@ char *readcontent(FILE *in, size_t *textsz_p)
     return text;
 }
 
-char **getlines(const char *text, size_t textsz, size_t *lines_cnt_p)
+const char **getlines(const char *text, size_t textsz, size_t *lines_cnt_p)
 {
     if (!text)
         return NULL;
@@ -166,7 +166,7 @@ char **getlines(const char *text, size_t textsz, size_t *lines_cnt_p)
     for (int i = 0; i < textsz; ++i)
         if (text[i] == '\n')
             ++lines_cnt;
-    char **lines = calloc(lines_cnt, sizeof(char*));
+    char const* *lines = calloc(lines_cnt, sizeof(char*));
     if (!lines)
     {
         printf("Cannot allocate memory for pointers to lines!\n");
